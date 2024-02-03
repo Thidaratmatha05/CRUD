@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <title>Data  - index </title>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-light bg-light" style="margin-bottom: 1.5rem;">
+    <div class="container">
+        <span class="navbar-text">
+            <h3>Data</h3>
+        </span>
+    </div>
+</nav>
+
+<div class="container">
+    <a href="{{ url_for('input') }}" class="btn btn-primary" style="margin-bottom: 1.3rem;">Input Data</a>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Success!</strong> {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif%}
+{% endwith %} 
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">Img</th>
+            <th scope="col">Map</th>
+            <th scope="col">Latitude</th>
+            <th scope="col">Longitude</th>
+            <th scope="col">---</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+            {% for hotel in data %}
+
+          <tr>
+            <th scope="row">{{ loop.index }}</th>
+            <td>{{ hotel.name }}</td>
+            <td>{{ hotel.address }}</td>
+            <td>{{ hotel.img }}</td>
+            <td>{{ hotel.map }}</td>
+            <td>{{ hotel.latitude }}</td>
+            <td>{{ hotel.longitude }}</td>
+            <td>
+                <a href="{{ url_for('edit_data', id=hotel.id ) }}" class="btn btn-warning">Edit</a>
+                <a href="{{ url_for('delete', id=hotel.id ) }}" class="btn btn-danger" onclick="return confirm('delete this data?')">Delete</a>
+            </td>
+          </tr>     
+
+          {% endfor %}
+          
+        </tbody>
+
+      </table>
+
+</div>
+    
+    <!-- bootstrap  -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+</body>
+</html>
