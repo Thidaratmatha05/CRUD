@@ -92,5 +92,18 @@ def delete(id):
 
     return redirect(url_for('index'))
 
+# # # # # # # # 
+import pandas as pd
+@app.route("/home" , methods=['GET', 'POST'])
+def home():
+    # file_path = inputFile
+    # df = pd.read_csv(file_path, header=None)
+    # print(df) 
+
+    return render_template("index.php")
+
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
